@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/jquery-3.2.1.js"></script>
+    <title>博客</title>
+</head>
+<body>
+<link rel="stylesheet" href="../../bootstrap.min.css">
+<h1>添加博客:</h1>
+<div class="form-group">
+    <label for="1">标题</label>
+    <input name="title" type="text" class="form-control" id="1">
+</div>
+<div class="form-group">
+    <label for="2">描述</label>
+    <input name="des" type="text" class="form-control" id="2" placeholder="请简要叙述一下博客内容">
+</div>
+<h4>内容</h4>
+<textarea id="3" name="content" class="form-control" rows="3"></textarea>
+
+<button id="a" class="btn btn-default col-md-4 col-md-offset-4 " role="button">添加</button>
+<a class="btn btn-default col-md-4 col-md-offset-4 " href="" role="button">返回</a>
+</body>
+
+<script>
+    //    $(function () {
+    //        $("#b").click(function () {
+    //            var t = $(" input[ name='title' ] ").val();
+    //            var d = $(" input[ name='des' ] ").val();
+    //            var c = $(" input[ name='content' ] ").val();
+    //
+    //            $(this).attr("href", "/blog?title=" + t + "&des=" + d + u + "&content=" + c);
+    //
+    //        });
+    //    });
+    $("#a").on("click", function () {
+        var title = $("#1").val();
+        var des = $("#2").val();
+        var content = $("#3").val();
+        $.ajax({
+                    url: "/blog",
+                    type: "POST",
+                    data: {"title": title, "des": des, "content": content},
+                    success: function (data) {
+                        if (data == "success") {
+                            window.location.href = '/success';
+//                            json = eval('(' + data + ')');
+//                            console.log(json);
+//                            $.each(data.comments(),function (i, item) {
+//                                $("#blog").append(
+//                                        "<th>" + item.title+"</th>"+
+//                                        "<th>" + item.des+"</th>"+
+//                                        "<th>" + item.content+"</th>"
+//                                );
+//                                window.location.href = '/success';
+//                            });
+                        } else {
+                            window.location.href = '/error';
+                        }
+                    }
+                }
+        )
+    })
+</script>
+</html>]

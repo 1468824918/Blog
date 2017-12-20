@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>注册</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+</head>
+<body>
+<link rel="stylesheet" href="../../bootstrap.min.css">
+<div class="container">
+    <div class="input-group col-md-4 col-md-offset-4">
+        <span class="input-group-addon" id="basic-addon1">用户名</span>
+        <input id="u" name="userName" type="text" class="form-control" placeholder="username" aria-describedby="basic-addon1">
+    </div>
+
+    <div class="input-group col-md-4 col-md-offset-4">
+        <span class="input-group-addon" id="basic-addon2">密码</span>
+        <input id="p" name="password" type="text" class="form-control" placeholder="password" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group col-md-4 col-md-offset-4">
+        <span class="input-group-addon" id="basic-addon3">重复密码</span>
+        <input id="ps" name="againPassword" type="text" class="form-control" placeholder="againPassword"
+               aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group col-md-4 col-md-offset-4">
+        <span class="input-group-addon" id="basic-addon5">电话</span>
+        <input id="t" name="tel" type="text" class="form-control" placeholder="tel" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group col-md-4 col-md-offset-4">
+        <span class="input-group-addon" id="basic-addon6">地址</span>
+        <input id="ad" name="address" type="text" class="form-control" placeholder="address" aria-describedby="basic-addon1">
+    </div>
+    <button id="a" class="btn btn-default col-md-4 col-md-offset-4 "  role="button">注册</button>
+</div>
+<script>
+//    $(function () {
+//        $("#a").click(function () {
+//            var u = $(" input[ name='userName' ] ").val();
+//            var p = $(" input[ name='password' ] ").val();
+//            var a = $(" input[ name='againPassword' ] ").val();
+//            var t = $(" input[ name='tel' ] ").val();
+//            var address = $(" input[ name='address' ] ").val();
+//
+//            $(this).attr("href", "register?userName=" + u +
+//                    "&password=" + p +
+//                    "&againPassword=" + a +
+//                    "&tel=" + t +
+//                    "&address=" + address);
+//
+//        });
+//    });
+
+    $("#a").on("click", function () {
+        var userName = $("#u").val();
+        var password = $("#p").val();
+        var againPassword = $("#ps").val();
+        var tel = $("#t").val();
+        var address = $("#ad").val();
+        $.ajax({
+                    url: "/register",
+                    type: "POST",
+                    data: {
+                        "userName": userName,
+                        "password": password,
+                        "againPassword":againPassword,
+                        "tel":tel,
+                        "address":address
+                    },
+                    success: function (data) {
+                        if (data == "login") {
+                            window.location.href = '/againLogin';
+                        }else {
+                            window.location.href = '/error';
+                        }
+                    }
+                }
+        )
+    })
+</script>
+</body>
+</html>
